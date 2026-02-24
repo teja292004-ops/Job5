@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Notification Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="logo">Job Tracker</h1>
+            <div class="nav-links">
+                <a href="#dashboard" class="nav-link active" data-page="dashboard">Dashboard</a>
+                <a href="#settings" class="nav-link" data-page="settings">Settings</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Dashboard Page -->
+        <div id="dashboard-page" class="page active">
+            <div class="page-header">
+                <h2>Job Dashboard</h2>
+                <div class="header-actions">
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="matchToggle">
+                        <span class="toggle-slider"></span>
+                        <span class="toggle-label">Show only jobs above my threshold</span>
+                    </label>
+                </div>
+            </div>
+
+            <div id="preferenceBanner" class="banner hidden">
+                <p>⚠️ Set your preferences to activate intelligent matching.</p>
+                <button onclick="navigateToSettings()">Go to Settings</button>
+            </div>
+
+            <div class="filters-bar">
+                <input type="text" id="keywordSearch" placeholder="Search by keyword..." class="filter-input">
+                
+                <select id="locationFilter" class="filter-select">
+                    <option value="">All Locations</option>
+                </select>
+
+                <select id="modeFilter" class="filter-select">
+                    <option value="">All Modes</option>
+                    <option value="Remote">Remote</option>
+                    <option value="Hybrid">Hybrid</option>
+                    <option value="Onsite">Onsite</option>
+                </select>
+
+                <select id="experienceFilter" class="filter-select">
+                    <option value="">All Experience</option>
+                    <option value="Entry">Entry</option>
+                    <option value="Mid">Mid</option>
+                    <option value="Senior">Senior</option>
+                </select>
+
+                <select id="sourceFilter" class="filter-select">
+                    <option value="">All Sources</option>
+                    <option value="LinkedIn">LinkedIn</option>
+                    <option value="Indeed">Indeed</option>
+                    <option value="Glassdoor">Glassdoor</option>
+                </select>
+
+                <select id="sortBy" class="filter-select">
+                    <option value="latest">Latest</option>
+                    <option value="matchScore">Match Score</option>
+                    <option value="salary">Salary</option>
+                </select>
+            </div>
+
+            <div id="jobsList" class="jobs-grid"></div>
+
+            <div id="emptyState" class="empty-state hidden">
+                <div class="empty-icon">🔍</div>
+                <h3>No roles match your criteria</h3>
+                <p>Adjust filters or lower threshold in settings.</p>
+            </div>
+        </div>
+
+        <!-- Settings Page -->
+        <div id="settings-page" class="page">
+            <div class="page-header">
+                <h2>Preferences</h2>
+            </div>
+
+            <form id="preferencesForm" class="settings-form">
+                <div class="form-group">
+                    <label for="roleKeywords">Role Keywords (comma-separated)</label>
+                    <input type="text" id="roleKeywords" placeholder="e.g., developer, engineer, frontend">
+                </div>
+
+                <div class="form-group">
+                    <label for="preferredLocations">Preferred Locations</label>
+                    <select id="preferredLocations" multiple size="5">
+                        <option value="New York">New York</option>
+                        <option value="San Francisco">San Francisco</option>
+                        <option value="London">London</option>
+                        <option value="Berlin">Berlin</option>
+                        <option value="Remote">Remote</option>
+                        <option value="Austin">Austin</option>
+                        <option value="Seattle">Seattle</option>
+                    </select>
+                    <small>Hold Ctrl/Cmd to select multiple</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Preferred Work Mode</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="preferredMode" value="Remote"> Remote</label>
+                        <label><input type="checkbox" name="preferredMode" value="Hybrid"> Hybrid</label>
+                        <label><input type="checkbox" name="preferredMode" value="Onsite"> Onsite</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="experienceLevel">Experience Level</label>
+                    <select id="experienceLevel">
+                        <option value="">Any</option>
+                        <option value="Entry">Entry</option>
+                        <option value="Mid">Mid</option>
+                        <option value="Senior">Senior</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="skills">Skills (comma-separated)</label>
+                    <input type="text" id="skills" placeholder="e.g., JavaScript, React, Node.js">
+                </div>
+
+                <div class="form-group">
+                    <label for="minMatchScore">Minimum Match Score: <span id="scoreValue">40</span></label>
+                    <input type="range" id="minMatchScore" min="0" max="100" value="40">
+                </div>
+
+                <button type="submit" class="btn-primary">Save Preferences</button>
+            </form>
+        </div>
+    </main>
+
+    <script src="src/app.js"></script>
+</body>
+</html>
