@@ -1,0 +1,8 @@
+{
+  "name": "job-tracker",
+  "version": "1.0.0",
+  "description": "Job Notification Tracker",
+  "scripts": {
+    "start": "serve ."
+  }
+}
